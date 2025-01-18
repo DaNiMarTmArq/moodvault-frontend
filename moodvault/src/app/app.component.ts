@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { LoginBarComponent } from './features/auth/login-bar/login-bar.component';
+import { LoginFormComponent } from './features/auth/login-form/login-form.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginBarComponent],
+  imports: [LoginBarComponent, LoginFormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
