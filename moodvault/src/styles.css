@@ -6,4 +6,8 @@
   html {
     font-family: Inter, system-ui, sans-serif;
   }
+  body {
+    @apply text-gray;
+    @apply bg-fill;
+  }
 }
