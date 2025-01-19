@@ -3,9 +3,11 @@ import { CenterLayoutComponent } from '../../../../shared/layouts/center-layout/
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-login-form',
+  selector: 'app-register-form',
   standalone: true,
   imports: [CenterLayoutComponent, RouterModule],
-  templateUrl: './login-form.component.html',
+  templateUrl: './register-form.component.html'
 })
-export class LoginFormComponent {}
+export class RegisterFormComponent {
+
+}
