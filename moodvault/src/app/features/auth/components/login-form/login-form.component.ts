@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CenterLayoutComponent } from '../../../shared/layouts/center-layout/center-layout.component';
+import { CenterLayoutComponent } from '../../../../shared/layouts/center-layout/center-layout.component';
 
 @Component({
   selector: 'app-login-form',
