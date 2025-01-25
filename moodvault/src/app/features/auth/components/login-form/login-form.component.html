@@ -1,71 +1,72 @@
-
-  <section id="login-form-container" class="bg-white p-5 min-w-[350px] relative before:block before:bg-primary before:absolute before:w-[350px] before:h-[450px] md:before:h-[460px] before:left-2 before:z-[-1] shadow-[4px_8px_6px_0px_rgba(0,_0,_0,_0.1)]">
-    <div
-      id="login-form-title"
-      class="flex flex-col justify-center items-center mb-8"
-    >
-      <h2 class="text-[34px] md:text-[40px] font-bold text-primary">Login</h2>
-      <p class="font-bold">Inicia sesión en tu cuenta</p>
-    </div>
-    <div id="login-form-input">
-      <form id="login">
-        <div
-          class="flex gap-3 bg-fill p-4 mb-4 border-2 border-t-fill border-b-primary border-x-fill"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-          >
-            <path
-              d="M10 10C11.5155 10 12.969 9.47322 14.0406 8.53553C15.1122 7.59785 15.7143 6.32608 15.7143 5C15.7143 3.67392 15.1122 2.40215 14.0406 1.46447C12.969 0.526784 11.5155 0 10 0C8.48448 0 7.03103 0.526784 5.95939 1.46447C4.88775 2.40215 4.28571 3.67392 4.28571 5C4.28571 6.32608 4.88775 7.59785 5.95939 8.53553C7.03103 9.47322 8.48448 10 10 10ZM7.95982 11.875C3.5625 11.875 0 14.9922 0 18.8398C0 19.4805 0.59375 20 1.32589 20H18.6741C19.4062 20 20 19.4805 20 18.8398C20 14.9922 16.4375 11.875 12.0402 11.875H7.95982Z"
-              fill="#89ADAD"
-            />
-          </svg>
-          <input
-            id="login-username"
-            type="text"
-            placeholder="Nombre de usuario"
-            class="appearance-none bg-fill w-full"
-          />
-        </div>
-        <div
-          class="flex gap-3 bg-fill p-4 mb-4 border-2 border-t-fill border-b-primary border-x-fill"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-          >
-            <path
-              d="M6.42857 5.625V7.5H13.5714V5.625C13.5714 3.89844 11.9732 2.5 10 2.5C8.02679 2.5 6.42857 3.89844 6.42857 5.625ZM3.57143 7.5V5.625C3.57143 2.51953 6.45089 0 10 0C13.5491 0 16.4286 2.51953 16.4286 5.625V7.5H17.1429C18.7188 7.5 20 8.62109 20 10V17.5C20 18.8789 18.7188 20 17.1429 20H2.85714C1.28125 20 0 18.8789 0 17.5V10C0 8.62109 1.28125 7.5 2.85714 7.5H3.57143Z"
-              fill="#89ADAD"
-            />
-          </svg>
-          <input
-            id="login-password"
-            type="password"
-            placeholder="Contraseña"
-            class="active:appearance-none bg-fill w-full"
-          />
-        </div>
-        <div>
-          <button class="w-full p-4 text-center text-white bg-primary">
-            Login
-          </button>
-        </div>
-      </form>
-    </div>
-    <div id="login-form-new" class="mt-12">
-      <button
-        class="w-full p-4 text-center text-primary bg-white border-2 border-primary"
+<section
+  id="login-form-container"
+  class="bg-white p-5 min-w-[350px] relative before:block before:bg-primary before:absolute before:w-[350px] before:h-[450px] md:before:h-[460px] before:left-2 before:z-[-1] shadow-[4px_8px_6px_0px_rgba(0,_0,_0,_0.1)]"
+>
+  <div
+    id="login-form-title"
+    class="flex flex-col justify-center items-center mb-8"
+  >
+    <h2 class="text-[34px] md:text-[40px] font-bold text-primary">Login</h2>
+    <p class="font-bold">Inicia sesión en tu cuenta</p>
+  </div>
+  <div id="login-form-input">
+    <form id="login">
+      <div
+        class="flex gap-3 bg-fill p-4 mb-4 border-2 border-t-fill border-b-primary border-x-fill"
       >
-        <a routerLink="/auth/register">Crea una nueva cuenta</a>
-      </button>
-    </div>
-  </section>
-
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+        >
+          <path
+            d="M10 10C11.5155 10 12.969 9.47322 14.0406 8.53553C15.1122 7.59785 15.7143 6.32608 15.7143 5C15.7143 3.67392 15.1122 2.40215 14.0406 1.46447C12.969 0.526784 11.5155 0 10 0C8.48448 0 7.03103 0.526784 5.95939 1.46447C4.88775 2.40215 4.28571 3.67392 4.28571 5C4.28571 6.32608 4.88775 7.59785 5.95939 8.53553C7.03103 9.47322 8.48448 10 10 10ZM7.95982 11.875C3.5625 11.875 0 14.9922 0 18.8398C0 19.4805 0.59375 20 1.32589 20H18.6741C19.4062 20 20 19.4805 20 18.8398C20 14.9922 16.4375 11.875 12.0402 11.875H7.95982Z"
+            fill="#89ADAD"
+          />
+        </svg>
+        <input
+          id="login-username"
+          type="text"
+          placeholder="Nombre de usuario"
+          class="appearance-none bg-fill w-full"
+        />
+      </div>
+      <div
+        class="flex gap-3 bg-fill p-4 mb-4 border-2 border-t-fill border-b-primary border-x-fill"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+        >
+          <path
+            d="M6.42857 5.625V7.5H13.5714V5.625C13.5714 3.89844 11.9732 2.5 10 2.5C8.02679 2.5 6.42857 3.89844 6.42857 5.625ZM3.57143 7.5V5.625C3.57143 2.51953 6.45089 0 10 0C13.5491 0 16.4286 2.51953 16.4286 5.625V7.5H17.1429C18.7188 7.5 20 8.62109 20 10V17.5C20 18.8789 18.7188 20 17.1429 20H2.85714C1.28125 20 0 18.8789 0 17.5V10C0 8.62109 1.28125 7.5 2.85714 7.5H3.57143Z"
+            fill="#89ADAD"
+          />
+        </svg>
+        <input
+          id="login-password"
+          type="password"
+          placeholder="Contraseña"
+          class="active:appearance-none bg-fill w-full"
+        />
+      </div>
+      <div>
+        <button class="w-full p-4 text-center text-white bg-primary">
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+  <div id="login-form-new" class="mt-12">
+    <button
+      class="w-full p-4 text-center text-primary bg-white border-2 border-primary"
+    >
+      <a routerLink="/auth/register">Crea una nueva cuenta</a>
+    </button>
+  </div>
+</section>

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CenterLayoutComponent } from '../../../../shared/layouts/center-layout/center-layout.component';
 import { RouterModule } from '@angular/router';
 
 @Component({
