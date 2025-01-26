@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../services/AuthService';
+import { User } from '../../../../shared/models/User';
 
 @Component({
   selector: 'app-login-form',
@@ -7,4 +9,6 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   templateUrl: './login-form.component.html',
 })
-export class LoginFormComponent {}
+export class LoginFormComponent {
+  constructor(private authService: AuthService) {}
+}
