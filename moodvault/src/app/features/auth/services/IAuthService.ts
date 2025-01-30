@@ -10,4 +10,6 @@ export interface AuthState {
 export interface IAuthService {
   login(user: User): Observable<AuthState>;
   register(user: User): Observable<AuthState>;
+  logout(): void;
+  isAuthenticated(): boolean;
 }
