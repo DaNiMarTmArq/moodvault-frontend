@@ -5,6 +5,7 @@ export interface AuthState {
   valid: boolean;
   message: string;
   error?: string;
+  status?: number;
 }
 
 export interface IAuthService {

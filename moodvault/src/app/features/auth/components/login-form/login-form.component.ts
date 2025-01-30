@@ -15,7 +15,7 @@ export class LoginFormComponent {
   onLogin(event: MouseEvent) {
     event.preventDefault();
     const user: User = {
-      username: 'yepaDani997x',
+      username: 'yepaDani997',
       password: 'willymosca997P',
     };
     this.authService.login(user).subscribe((state) => {

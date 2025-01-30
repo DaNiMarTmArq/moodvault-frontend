@@ -5,4 +5,5 @@ export interface AuthResponse {
   token: string;
   message: string;
   error?: string;
+  status?: number;
 }

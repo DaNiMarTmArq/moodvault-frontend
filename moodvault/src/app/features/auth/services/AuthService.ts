@@ -50,12 +50,13 @@ export class AuthService implements IAuthService {
         error: response.error || undefined,
       })),
       catchError((error: HttpErrorResponse) => {
-        console.log('Error', error);
         const message = error?.error.error || 'An unexpected error occurred';
+        const status = error.status;
         return of({
           valid: false,
           message,
           error: error?.message || 'Unknown error',
+          status,
         });
       })
     );
