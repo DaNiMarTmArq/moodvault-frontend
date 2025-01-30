@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { User } from '../../../shared/models/User';
@@ -49,8 +49,9 @@ export class AuthService implements IAuthService {
         message: response.message,
         error: response.error || undefined,
       })),
-      catchError((error) => {
-        const message = error?.error?.message || 'An unexpected error occurred';
+      catchError((error: HttpErrorResponse) => {
+        console.log('Error', error);
+        const message = error?.error.error || 'An unexpected error occurred';
         return of({
           valid: false,
           message,
