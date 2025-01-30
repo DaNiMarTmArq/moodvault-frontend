@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { User } from '../../../shared/models/User';
 import { AuthResponse } from '../models/AuthResponse';
-import { IAuthService } from './IAuthService';
+import { AuthState, IAuthService } from './IAuthService';
 
 @Injectable({
   providedIn: 'root',
@@ -13,21 +13,34 @@ export class AuthService implements IAuthService {
     'https://moodvault-server.onrender.com/api/v1/auth';
   private http = inject(HttpClient);
 
-  login(user: User): Observable<boolean> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/login`, user).pipe(
-      tap((response) => localStorage.setItem('token', response.token)),
-      map((response) => {
-        if (response.error) return false;
-        return true;
-      }),
-      catchError((error) => {
-        console.error('Login failed', error);
-        return of(false);
-      })
+  login(user: User): Observable<AuthState> {
+    return this.handleAuthResponse(
+      this.http.post<AuthResponse>(`${this.baseUrl}/login`, user)
     );
   }
 
-  register(user: User): Observable<boolean> {
-    throw new Error();
+  register(user: User): Observable<AuthState> {
+    return this.handleAuthResponse(
+      this.http.post<AuthResponse>(`${this.baseUrl}/register`, user)
+    );
+  }
+
+  private handleAuthResponse(
+    obs: Observable<AuthResponse>
+  ): Observable<AuthState> {
+    return obs.pipe(
+      tap((response) => {
+        if (response.token) localStorage.setItem('token', response.token);
+      }),
+      map((response) => ({
+        valid: !response.error,
+        message: response.message,
+        error: response.error || undefined,
+      })),
+      catchError((error) => {
+        const message = error?.error?.message || 'An unexpected error occurred';
+        return of({ valid: false, message, error: JSON.stringify(error) });
+      })
+    );
   }
 }
