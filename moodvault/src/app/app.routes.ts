@@ -3,7 +3,7 @@ import { LoginPageComponent } from './features/auth/components/login-page/login-
 import { LoginFormComponent } from './features/auth/components/login-form/login-form.component';
 import { RegisterFormComponent } from './features/auth/components/register-form/register-form.component';
 import { MoodsListView } from './features/moods/components/dashboard-home/dashboard-home.component';
-import { loginGuard } from './shared/route-guards/login-guard.guard';
+import { loginGuard } from './shared/route-guards/loginGuard';
 
 export const routes: Routes = [
   {
