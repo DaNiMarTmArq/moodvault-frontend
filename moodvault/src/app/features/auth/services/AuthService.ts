@@ -5,13 +5,13 @@ import { User } from '../../../shared/models/User';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthState, IAuthService } from './IAuthService';
 import { TokenService } from '../../../shared/services/TokenService';
+import { API_BASE_URL } from '../../../shared/constants/constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements IAuthService {
-  private readonly baseUrl =
-    'https://moodvault-server.onrender.com/api/v1/auth';
+  private readonly baseUrl = API_BASE_URL;
   private http = inject(HttpClient);
   private tokenService = inject(TokenService);
 
