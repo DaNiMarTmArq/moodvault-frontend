@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
-import { LoginPageComponent } from './features/auth/components/login-page/login-page.component';
 import { LoginFormComponent } from './features/auth/components/login-form/login-form.component';
+import { LoginPageComponent } from './features/auth/components/login-page/login-page.component';
 import { RegisterFormComponent } from './features/auth/components/register-form/register-form.component';
-import { MoodsListView } from './features/moods/components/dashboard-home/dashboard-home.component';
+import { MoodsDashboard } from './features/moods/components/dashboard/dashboard-home.component';
 import { loginGuard } from './shared/route-guards/loginGuard';
+import { CreateMood } from './features/moods/components/create-mood/create-mood.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/moods/list',
+    redirectTo: '/moods/dashboard',
     pathMatch: 'full',
   },
   {
@@ -16,9 +17,16 @@ export const routes: Routes = [
     canActivate: [loginGuard],
     children: [
       {
-        path: 'list',
-        component: MoodsListView,
-        title: 'MoodVault - Moods List',
+        path: 'dashboard',
+        component: MoodsDashboard,
+        canActivate: [loginGuard],
+        title: 'MoodVault - Moods Dashboard',
+      },
+      {
+        path: 'create',
+        component: CreateMood,
+        canActivate: [loginGuard],
+        title: 'MoodVault - Crear Mood',
       },
     ],
   },
@@ -40,7 +48,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/moods/list',
+    redirectTo: '/moods/dashboard',
     pathMatch: 'full',
   },
 ];

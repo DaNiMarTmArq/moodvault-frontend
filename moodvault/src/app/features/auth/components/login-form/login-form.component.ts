@@ -23,7 +23,7 @@ export class LoginFormComponent {
       next: (state) => {
         this.isLoading = false;
         if (state.valid) {
-          this.router.navigate(['moods', 'list']);
+          this.router.navigate(['moods', 'dashboard']);
         } else {
           form.reset();
           this.formError =
