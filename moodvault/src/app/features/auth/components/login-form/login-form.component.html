@@ -9,6 +9,11 @@
     <h2 class="text-[34px] md:text-[40px] font-bold text-primary">Login</h2>
     <p class="font-bold">Inicia sesión en tu cuenta</p>
   </div>
+  @if (formError) {
+  <div class="flex justify-center items-center">
+    <p class="text-red">{{ formError }}</p>
+  </div>
+  }
   <div id="login-form-input">
     <form id="login" #authForm="ngForm" (ngSubmit)="onLogin(authForm)">
       <div

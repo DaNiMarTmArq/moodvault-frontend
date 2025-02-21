@@ -5,13 +5,13 @@ import { User } from '../../../shared/models/User';
 import { AuthResponse } from '../models/AuthResponse';
 import { AuthState, IAuthService } from './IAuthService';
 import { TokenService } from '../../../shared/services/TokenService';
-import { API_BASE_URL } from '../../../shared/constants/constants';
+import { API_BASE_URL_AUTH } from '../../../shared/constants/constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements IAuthService {
-  private readonly baseUrl = API_BASE_URL;
+  private readonly baseUrl = API_BASE_URL_AUTH;
   private http = inject(HttpClient);
   private tokenService = inject(TokenService);
 
@@ -33,7 +33,6 @@ export class AuthService implements IAuthService {
 
   isAuthenticated(): boolean {
     const token = this.tokenService.getToken();
-    if (token) console.log('token', this.tokenService.decodeToken(token));
     return this.tokenService.isTokenValid(token);
   }
 
