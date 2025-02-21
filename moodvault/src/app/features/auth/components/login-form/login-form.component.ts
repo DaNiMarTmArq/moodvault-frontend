@@ -32,26 +32,10 @@ export class LoginFormComponent {
               : 'Error inesperado, inténtalo de nuevo';
         }
       },
-      error: (err) => {
+      error: () => {
         this.isLoading = false;
         this.formError = 'Error inesperado, inténtalo de nuevo';
-        console.error('Login error:', err);
       },
     });
   }
-  // onLogin(form: NgForm) {
-  //   this.isLoading = true;
-  //   const { username, password } = form.value;
-  //   this.authService.login({ username, password }).subscribe((state) => {
-  //     this.isLoading = false;
-  //     if (state.valid) {
-  //       this.router.navigate(['moods', 'list']);
-  //     } else {
-  //       form.reset();
-  //       state.message === 'Incorrect username or password'
-  //         ? (this.formError = 'Usuario o contraseña incorrectos')
-  //         : 'Error inesperado, intentalo de nuevo';
-  //     }
-  //   });
-  // }
 }
