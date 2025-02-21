@@ -1,6 +1,6 @@
 <section
   id="login-form-container"
-  class="bg-white p-5 min-w-[350px] relative before:block before:bg-primary before:absolute before:w-[350px] before:h-[450px] md:before:h-[460px] before:left-2 before:z-[-1] shadow-[4px_8px_6px_0px_rgba(0,_0,_0,_0.1)]"
+  class="relative flex min-h-[460px] min-w-[350px] flex-col justify-between bg-white p-5 shadow-[4px_8px_6px_0px_rgba(0,_0,_0,_0.1)] before:absolute before:left-2 before:z-[-1] before:block before:h-[450px] before:w-[350px] before:bg-primary md:min-h-[470px] md:before:h-[460px]"
 >
   <div
     id="login-form-title"
@@ -10,7 +10,7 @@
     <p class="font-bold">Inicia sesión en tu cuenta</p>
   </div>
   <div id="login-form-input">
-    <form id="login">
+    <form id="login" #authForm="ngForm" (ngSubmit)="onLogin(authForm)">
       <div
         class="flex gap-3 bg-fill p-4 mb-4 border-2 border-t-fill border-b-primary border-x-fill"
       >
@@ -32,10 +32,15 @@
           placeholder="Nombre de usuario"
           class="appearance-none bg-fill w-full"
           name="username"
-          [(ngModel)]="username"
+          ngModel
+          #userInput="ngModel"
           required
         />
       </div>
+      @if (userInput.touched && !userInput.valid) {
+      <p class="my-2 text-red">Introduce tu nombre de usuario.</p>
+      }
+
       <div
         class="flex gap-3 bg-fill p-4 mb-4 border-2 border-t-fill border-b-primary border-x-fill"
       >
@@ -54,15 +59,24 @@
         <input
           id="login-password"
           type="password"
-          placeholder="Contraseña"
           class="active:appearance-none bg-fill w-full"
+          placeholder="Contraseña"
           name="password"
-          [(ngModel)]="password"
+          ngModel
           required
+          #pwInput="ngModel"
         />
       </div>
+      @if (pwInput.touched && !pwInput.valid) {
+      <p class="my-2 text-red">Introduce tu contraseña.</p>
+      }
+
       <div class="flex justify-center">
-        @if(isLoading) {
+        @if (authForm.valid && !isLoading) {
+        <button class="w-full p-4 text-center text-white bg-primary">
+          Login
+        </button>
+        } @if(isLoading) {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="30"
@@ -82,21 +96,12 @@
             />
           </path>
         </svg>
-        } @else {
-        <button
-          class="w-full p-4 text-center text-white bg-primary"
-          (click)="onLogin($event)"
-        >
-          Login
-        </button>
         }
       </div>
     </form>
   </div>
   <div id="login-form-new" class="mt-12">
-    <button
-      class="w-full p-4 text-center text-primary bg-white border-2 border-primary"
-    >
+    <button class="w-full p-4 text-center text-primary">
       <a routerLink="/auth/register">Crea una nueva cuenta</a>
     </button>
   </div>
