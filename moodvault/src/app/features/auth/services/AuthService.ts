@@ -33,7 +33,8 @@ export class AuthService implements IAuthService {
 
   isAuthenticated(): boolean {
     const token = this.tokenService.getToken();
-    return token ? true : false;
+    if (token) console.log('token', this.tokenService.decodeToken(token));
+    return this.tokenService.isTokenValid(token);
   }
 
   private handleAuthResponse(
