@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
 import { LoginFormComponent } from './features/auth/components/login-form/login-form.component';
-import { LoginPageComponent } from './features/auth/components/login-page/login-page.component';
 import { RegisterFormComponent } from './features/auth/components/register-form/register-form.component';
-import { MoodsDashboard } from './features/moods/components/dashboard/dashboard-home.component';
-import { loginGuard } from './shared/route-guards/loginGuard';
 import { CreateMood } from './features/moods/components/create-mood/create-mood.component';
+import { MoodsDashboard } from './features/moods/components/dashboard/dashboard-home.component';
+import { AppLayoutComponent } from './shared/layouts/app-layout/app-layout.component';
+import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
+import { loginGuard } from './shared/route-guards/loginGuard';
 
 export const routes: Routes = [
   {
@@ -14,6 +15,7 @@ export const routes: Routes = [
   },
   {
     path: 'moods',
+    component: AppLayoutComponent,
     canActivate: [loginGuard],
     children: [
       {
@@ -37,7 +39,7 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    component: LoginPageComponent,
+    component: AuthLayoutComponent,
     children: [
       {
         path: 'login',
