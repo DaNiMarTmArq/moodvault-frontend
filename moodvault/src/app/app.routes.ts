@@ -17,6 +17,11 @@ export const routes: Routes = [
     canActivate: [loginGuard],
     children: [
       {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
         path: 'dashboard',
         component: MoodsDashboard,
         canActivate: [loginGuard],
