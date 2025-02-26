@@ -13,7 +13,7 @@ export class RangeInput {
     veryUnpleasant: '#2F3E46',
     unpleasant: '#354F52',
     neutral: '#52796F',
-    pleasant: '#99AF9E',
+    pleasant: '#84A98C',
     veryPleasant: '#99AF9E',
   };
   inputValue = 3.0;
@@ -21,8 +21,9 @@ export class RangeInput {
   setBackground(): string {
     if (this.inputValue <= 2.0) return this.backgrounds.veryUnpleasant;
     if (this.inputValue < 3.0) return this.backgrounds.unpleasant;
-    if (this.inputValue < 4.0) return this.backgrounds.neutral;
-    return this.backgrounds.pleasant;
+    if (this.inputValue === 3.0) return this.backgrounds.neutral;
+    if (this.inputValue < 4.0) return this.backgrounds.pleasant;
+    return this.backgrounds.veryPleasant;
   }
 
   get background(): string {
