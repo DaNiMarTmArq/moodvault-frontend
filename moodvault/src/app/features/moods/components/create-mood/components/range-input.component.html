@@ -1,0 +1,14 @@
+<div class="slidecontainer">
+  <input
+    type="range"
+    min="1.0"
+    max="5.0"
+    [(ngModel)]="inputValue"
+    (input)="setBackground()"
+    step="0.1"
+    class="slider"
+    id="myRange"
+    [style.background]="background"
+    aria-label="Mood level slider from 1 (very unpleasant) to 5 (very pleasant)"
+  />
+</div>
