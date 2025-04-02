@@ -15,4 +15,13 @@ import { CenterLayoutComponent } from '../../../../shared/layouts/center-layout/
   ],
   templateUrl: './create-mood.component.html',
 })
-export class CreateMood {}
+export class CreateMood {
+  createMoodStep = signal(1);
+  sliderTouched = signal(false);
+  moodScore = signal(3.0);
+
+  getMoodScore(score: number) {
+    if (!this.sliderTouched()) this.sliderTouched.set(true);
+    this.moodScore.set(score);
+  }
+}
