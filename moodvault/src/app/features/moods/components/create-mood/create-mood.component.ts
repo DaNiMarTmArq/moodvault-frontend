@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { WrapperLayoutComponent } from '../../../../shared/layouts/wrapper-layout/wrapper-layout.component';
-import { RangeInput } from './components/range-input.component';
 import { FormsModule } from '@angular/forms';
 import { CenterLayoutComponent } from '../../../../shared/layouts/center-layout/center-layout.component';
+import { WrapperLayoutComponent } from '../../../../shared/layouts/wrapper-layout/wrapper-layout.component';
+import { RangeInput } from './components/range-input.component';
 
 @Component({
   selector: 'app-create-mood',
