@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -16,17 +16,24 @@ export class RangeInput {
     pleasant: '#84A98C',
     veryPleasant: '#99AF9E',
   };
-  inputValue = 3.0;
 
-  setBackground(): string {
-    if (this.inputValue <= 2.0) return this.backgrounds.veryUnpleasant;
-    if (this.inputValue < 3.0) return this.backgrounds.unpleasant;
-    if (this.inputValue === 3.0) return this.backgrounds.neutral;
-    if (this.inputValue < 4.0) return this.backgrounds.pleasant;
+  rangeValue = signal(3.0);
+  outputValue = output<number>({ alias: 'newValue' });
+
+  background = computed(() => {
+    const value = this.rangeValue();
+    if (value <= 2.0) return this.backgrounds.veryUnpleasant;
+    if (value < 3.0) return this.backgrounds.unpleasant;
+    if (value === 3.0) return this.backgrounds.neutral;
+    if (value < 4.0) return this.backgrounds.pleasant;
     return this.backgrounds.veryPleasant;
-  }
+  });
 
-  get background(): string {
-    return this.setBackground();
+  updateInput(event: Event) {
+    const value = (event.target as HTMLInputElement)?.value;
+    if (value !== undefined) {
+      this.rangeValue.set(parseFloat(value));
+      this.outputValue.emit(this.rangeValue());
+    }
   }
 }
