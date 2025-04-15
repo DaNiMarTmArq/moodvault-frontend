@@ -10,11 +10,26 @@
       </h1>
 
       <section class="mt-10">
-        <h2 class="mb-4 text-2xl text-center">Neutral</h2>
-        <app-range-input (newValue)="getMoodScore($event)" />
+        <h2 class="mb-4 text-2xl text-center">{{ moodState() }}</h2>
+        <app-range-input
+          (newValue)="getMoodScore($event)"
+          [inputRangeValue]="this.moodScore()"
+        />
       </section>
-      } @case (2) {
-      <h1 class="my-6 text-4xl text-center">Elige tus emociones</h1>
+
+      @if (this.sliderTouched()) {
+      <section class="mt-10">
+        <button
+          class="w-full bg-primary text-white p-4 rounded-md"
+          (click)="nextStep()"
+        >
+          Siguiente
+        </button>
+      </section>
+      } } @case (2) {
+      <h1 class="my-6 text-4xl text-center">
+        ¿Que emociones describen mejor ese estado de animo?
+      </h1>
       <section class="mt-10">
         <div class="flex flex-wrap gap-3 justify-center">
           @for (item of [1,3,4,5,6]; track $index) {
@@ -25,14 +40,41 @@
           </p>
           }
         </div>
+        <section class="mt-10 flex gap-2">
+          <button
+            class="w-full bg-white border border-primary p-4 rounded-md"
+            (click)="previousStep()"
+          >
+            Anterior
+          </button>
+          <button
+            class="w-full bg-primary text-white p-4 rounded-md"
+            (click)="nextStep()"
+          >
+            Siguiente
+          </button>
+        </section>
       </section>
       } @case (3) {
-      <h1 class="my-6 text-4xl text-center">Algo mas que añadir</h1>
+      <h1 class="my-6 text-4xl text-center">
+        ¿Algún contexto más que quieras añadir?
+      </h1>
       <section class="mt-10">
         <textarea
           class="w-full min-h-[150px] p-4 bg-fill"
           placeholder="Descripcion..."
         ></textarea>
+      </section>
+      <section class="mt-10 flex gap-2">
+        <button
+          class="w-full bg-white border border-primary p-4 rounded-md"
+          (click)="previousStep()"
+        >
+          Anterior
+        </button>
+        <button class="w-full bg-primary text-white p-4 rounded-md">
+          Registrar
+        </button>
       </section>
       } }
     </section>

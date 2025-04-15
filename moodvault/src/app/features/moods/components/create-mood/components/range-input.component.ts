@@ -1,4 +1,4 @@
-import { Component, computed, output, signal } from '@angular/core';
+import { Component, computed, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -16,9 +16,18 @@ export class RangeInput {
     pleasant: '#84A98C',
     veryPleasant: '#99AF9E',
   };
-
+  inputRangeValue = input<number>();
   rangeValue = signal(3.0);
   outputValue = output<number>({ alias: 'newValue' });
+
+  ngOnInit() {
+    if (
+      this.inputRangeValue() &&
+      this.inputRangeValue() !== this.rangeValue()
+    ) {
+      this.rangeValue.set(this.inputRangeValue()!);
+    }
+  }
 
   background = computed(() => {
     const value = this.rangeValue();
