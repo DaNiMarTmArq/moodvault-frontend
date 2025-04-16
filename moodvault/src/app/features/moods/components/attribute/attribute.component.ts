@@ -9,10 +9,10 @@ import { Component, Input, input, output } from '@angular/core';
   styleUrl: './attribute.component.css',
 })
 export class AttributeComponent {
-  attributeText = input();
+  attributeText = input<string>('');
   @Input() isActive = false;
   score = input(3.0);
-  emitToggle = output<boolean>({ alias: 'toggle' });
+  emitToggle = output<{ value: string; active: boolean }>({ alias: 'toggle' });
 
   get attributeClass() {
     const baseClasses =
@@ -50,6 +50,9 @@ export class AttributeComponent {
 
   toggleActive() {
     this.isActive = !this.isActive;
-    this.emitToggle.emit(this.isActive);
+    this.emitToggle.emit({
+      value: this.attributeText(),
+      active: this.isActive,
+    });
   }
 }

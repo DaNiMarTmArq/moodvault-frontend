@@ -1,8 +1,15 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { WrapperLayoutComponent } from '../../../../shared/layouts/wrapper-layout/wrapper-layout.component';
 import { RangeInput } from './components/range-input.component';
 import { FormsModule } from '@angular/forms';
 import { CenterLayoutComponent } from '../../../../shared/layouts/center-layout/center-layout.component';
+import { AttributeService } from '../../../../shared/services/AttributeService';
+import { AttributeComponent } from '../attribute/attribute.component';
+
+interface Attribute {
+  value: string;
+  active: boolean;
+}
 
 @Component({
   selector: 'app-create-mood',
@@ -12,6 +19,7 @@ import { CenterLayoutComponent } from '../../../../shared/layouts/center-layout/
     RangeInput,
     FormsModule,
     CenterLayoutComponent,
+    AttributeComponent,
   ],
   templateUrl: './create-mood.component.html',
 })
@@ -19,14 +27,15 @@ export class CreateMood {
   createMoodStep = signal(1);
   sliderTouched = signal(false);
   moodScore = signal(3.0);
+  attributeService = inject(AttributeService);
+  attributes = signal<Attribute[]>([]);
 
-  getMoodScore(score: number) {
-    if (!this.sliderTouched() && score !== this.moodScore())
-      this.sliderTouched.set(true);
+  setMoodScore(score: number) {
+    if (!this.sliderTouched()) this.sliderTouched.set(true);
     this.moodScore.set(score);
   }
 
-  moodState() {
+  get moodState() {
     if (this.moodScore() <= 1) return 'Muy malo';
     if (this.moodScore() <= 2) return 'Malo';
     if (this.moodScore() <= 3) return 'Neutral';
@@ -36,12 +45,34 @@ export class CreateMood {
   }
 
   nextStep() {
-    if (this.createMoodStep() <= 3)
-      this.createMoodStep.set(this.createMoodStep() + 1);
+    const nextStep = this.createMoodStep() + 1;
+    if (nextStep === 2) {
+      const attributes = this.attributeService
+        .getAttributesByScore(this.moodScore())
+        .map((attr) => {
+          return {
+            value: attr,
+            active: false,
+          };
+        });
+      this.attributes.set(attributes);
+    }
+    if (nextStep <= 3) this.createMoodStep.set(nextStep);
   }
 
   previousStep() {
-    if (this.createMoodStep() >= 1)
-      this.createMoodStep.set(this.createMoodStep() - 1);
+    const previousStep = this.createMoodStep() - 1;
+    if (previousStep === 1) {
+      this.attributes.set([]);
+    }
+    if (this.createMoodStep() >= 1) this.createMoodStep.set(previousStep);
+  }
+
+  addActiveAttribute(attribute: Attribute) {
+    const attributes = this.attributes();
+    const index = attributes.findIndex(
+      (attr) => attr.value === attribute.value
+    );
+    this.attributes()[index].active = attribute.active;
   }
 }
