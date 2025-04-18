@@ -45,6 +45,7 @@
             [isActive]="attribute.active"
           ></app-attribute>
           }
+          <app-newattribute (newAttribute)="setNewAttribute($event)" />
         </div>
         <section class="mt-10 flex gap-2">
           <button

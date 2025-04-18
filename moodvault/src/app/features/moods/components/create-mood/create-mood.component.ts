@@ -1,10 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { WrapperLayoutComponent } from '../../../../shared/layouts/wrapper-layout/wrapper-layout.component';
-import { RangeInput } from './components/range-input.component';
+import { RangeInput } from './components/range-input/range-input.component';
 import { FormsModule } from '@angular/forms';
 import { CenterLayoutComponent } from '../../../../shared/layouts/center-layout/center-layout.component';
 import { AttributeService } from '../../../../shared/services/AttributeService';
 import { AttributeComponent } from '../attribute/attribute.component';
+import { NewattributeComponent } from '../newattribute/newattribute.component';
 
 interface Attribute {
   value: string;
@@ -20,6 +21,7 @@ interface Attribute {
     FormsModule,
     CenterLayoutComponent,
     AttributeComponent,
+    NewattributeComponent,
   ],
   templateUrl: './create-mood.component.html',
 })
@@ -74,5 +76,15 @@ export class CreateMood {
       (attr) => attr.value === attribute.value
     );
     this.attributes()[index].active = attribute.active;
+  }
+
+  setNewAttribute(value: string) {
+    const newAttribute: Attribute = {
+      value,
+      active: true,
+    };
+
+    const attributes = this.attributes();
+    attributes.push(newAttribute);
   }
 }

@@ -1,0 +1,26 @@
+@if (collapsed()) {
+<span
+  class="inline-block rounded-full px-4 py-2 mx-2 w-fit cursor-pointer border border-gray text-gray"
+  (click)="collapsed.set(false)"
+  >+</span
+>
+} @else {
+<div class="block">
+  <div
+    class="rounded-full border border-gray px-4 py-2 mx-2 w-fit flex items-center"
+  >
+    <input
+      type="text"
+      id="first_name"
+      class="border-none outline-none flex-grow block"
+      placeholder="Escribe una emocion..."
+      [(ngModel)]="attributeName"
+    />
+    <span
+      class="inline-block rounded-full px-2 py-2 mx-2 w-fit cursor-pointer text-gray"
+      (click)="emitNewAttribute()"
+      >Añadir</span
+    >
+  </div>
+</div>
+}
