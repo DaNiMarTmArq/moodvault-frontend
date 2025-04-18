@@ -43,6 +43,8 @@ export class AuthService implements IAuthService {
       tap((response) => {
         const token = response.token;
         if (token) this.tokenService.setToken(token);
+        const uuid = response.user.id;
+        if (uuid) localStorage.setItem('uuid', uuid);
       }),
       map((response) => ({
         valid: !response.error,
