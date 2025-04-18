@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { API_BASE_URL_MOOD } from '../../../shared/constants/constants';
-import { CreateMoodDTO, CreateMoodResponseDTO } from './DTOs/CreateMood';
-import { throwError } from 'rxjs';
+import { CreateMoodDTO, CreateMoodResponseDTO } from './models/CreateMood';
 
 @Injectable({
   providedIn: 'root',
