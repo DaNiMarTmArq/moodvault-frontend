@@ -1,14 +1,13 @@
-import { Component, inject, signal } from '@angular/core';
-import { WrapperLayoutComponent } from '../../../../shared/layouts/wrapper-layout/wrapper-layout.component';
-import { RangeInput } from './components/range-input/range-input.component';
+import { ChangeDetectorRef, Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CenterLayoutComponent } from '../../../../shared/layouts/center-layout/center-layout.component';
+import { WrapperLayoutComponent } from '../../../../shared/layouts/wrapper-layout/wrapper-layout.component';
 import { AttributeService } from '../../../../shared/services/AttributeService';
-import { AttributeComponent } from '../attribute/attribute.component';
-import { NewattributeComponent } from '../newattribute/newattribute.component';
-import { Mood } from '../../../../shared/models/Mood';
 import { CreateMoodDTO } from '../../services/models/CreateMood';
 import { MoodService } from '../../services/MoodService';
+import { AttributeComponent } from '../attribute/attribute.component';
+import { NewattributeComponent } from '../newattribute/newattribute.component';
+import { RangeInput } from './components/range-input/range-input.component';
 
 interface Attribute {
   value: string;
@@ -37,6 +36,8 @@ export class CreateMood {
   moodScore = signal(3.0);
   attributes = signal<Attribute[]>([]);
   moodDescription = '';
+  isRegistering = signal(false);
+  error = signal(false);
 
   setMoodScore(score: number) {
     if (!this.sliderTouched()) this.sliderTouched.set(true);
@@ -99,7 +100,6 @@ export class CreateMood {
       (attr) => attr.active
     );
     const moodScore = this.moodScore();
-    const description = this.moodState;
     const mood: CreateMoodDTO = {
       score: Math.floor(moodScore),
       description: this.moodDescription.trim(),
@@ -115,12 +115,22 @@ export class CreateMood {
   }
 
   async handleCreateMood() {
+    this.isRegistering.set(true);
     try {
       const newMoodDto = this.createNewMoodDto();
       const response = await this.moodService.createMood(newMoodDto);
       console.log(response);
     } catch (error) {
-      console.error('Error creating mood:', error);
+      this.setError();
+    } finally {
+      this.isRegistering.set(false);
     }
+  }
+
+  setError() {
+    this.error.set(true);
+    setTimeout(() => {
+      this.error.set(false);
+    }, 3000);
   }
 }
