@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { WrapperLayoutComponent } from '../../../../shared/layouts/wrapper-layout/wrapper-layout.component';
 import { RouterModule } from '@angular/router';
+import { WrapperLayoutComponent } from '../../../../shared/layouts/wrapper-layout/wrapper-layout.component';
 
 @Component({
   selector: 'app-moods-list-view',
