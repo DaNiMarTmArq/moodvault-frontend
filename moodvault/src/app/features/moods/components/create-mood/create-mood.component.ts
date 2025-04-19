@@ -6,6 +6,9 @@ import { CenterLayoutComponent } from '../../../../shared/layouts/center-layout/
 import { AttributeService } from '../../../../shared/services/AttributeService';
 import { AttributeComponent } from '../attribute/attribute.component';
 import { NewattributeComponent } from '../newattribute/newattribute.component';
+import { Mood } from '../../../../shared/models/Mood';
+import { CreateMoodDTO } from '../../services/models/CreateMood';
+import { MoodService } from '../../services/MoodService';
 
 interface Attribute {
   value: string;
@@ -22,15 +25,18 @@ interface Attribute {
     CenterLayoutComponent,
     AttributeComponent,
     NewattributeComponent,
+    FormsModule,
   ],
   templateUrl: './create-mood.component.html',
 })
 export class CreateMood {
+  attributeService = inject(AttributeService);
+  moodService = inject(MoodService);
   createMoodStep = signal(1);
   sliderTouched = signal(false);
   moodScore = signal(3.0);
-  attributeService = inject(AttributeService);
   attributes = signal<Attribute[]>([]);
+  moodDescription = '';
 
   setMoodScore(score: number) {
     if (!this.sliderTouched()) this.sliderTouched.set(true);
@@ -86,5 +92,35 @@ export class CreateMood {
 
     const attributes = this.attributes();
     attributes.push(newAttribute);
+  }
+
+  createNewMoodDto(): CreateMoodDTO {
+    const activeMoodAttributes = this.attributes().filter(
+      (attr) => attr.active
+    );
+    const moodScore = this.moodScore();
+    const description = this.moodState;
+    const mood: CreateMoodDTO = {
+      score: Math.floor(moodScore),
+      description: this.moodDescription,
+      moodAttributes: activeMoodAttributes.map((attribute, index) => {
+        return {
+          id: index + 1,
+          name: attribute.value,
+          type: 'emotion',
+        };
+      }),
+    };
+    return mood;
+  }
+
+  async handleCreateMood() {
+    try {
+      const newMoodDto = this.createNewMoodDto();
+      const response = await this.moodService.createMood(newMoodDto);
+      console.log(response);
+    } catch (error) {
+      console.error('Error creating mood:', error);
+    }
   }
 }
