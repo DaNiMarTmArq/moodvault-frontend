@@ -102,7 +102,7 @@ export class CreateMood {
     const description = this.moodState;
     const mood: CreateMoodDTO = {
       score: Math.floor(moodScore),
-      description: this.moodDescription,
+      description: this.moodDescription.trim(),
       moodAttributes: activeMoodAttributes.map((attribute, index) => {
         return {
           id: index + 1,
